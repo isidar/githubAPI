@@ -10,9 +10,9 @@
 		21FB89D8203EF08B00FF7741 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FB89D7203EF08B00FF7741 /* AppDelegate.swift */; };
 		21FB89DA203EF08B00FF7741 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FB89D9203EF08B00FF7741 /* ViewController.swift */; };
 		21FB89DD203EF08B00FF7741 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21FB89DB203EF08B00FF7741 /* Main.storyboard */; };
-		21FB89DF203EF08B00FF7741 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21FB89DE203EF08B00FF7741 /* Assets.xcassets */; };
 		21FB89E2203EF08B00FF7741 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21FB89E0203EF08B00FF7741 /* LaunchScreen.storyboard */; };
 		21FB89ED203EF08B00FF7741 /* githubAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FB89EC203EF08B00FF7741 /* githubAPITests.swift */; };
+		21FB89F8203EF3AA00FF7741 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21FB89F7203EF3AA00FF7741 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,12 +30,12 @@
 		21FB89D7203EF08B00FF7741 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21FB89D9203EF08B00FF7741 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		21FB89DC203EF08B00FF7741 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		21FB89DE203EF08B00FF7741 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		21FB89E1203EF08B00FF7741 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		21FB89E3203EF08B00FF7741 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21FB89E8203EF08B00FF7741 /* githubAPITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = githubAPITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		21FB89EC203EF08B00FF7741 /* githubAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = githubAPITests.swift; sourceTree = "<group>"; };
 		21FB89EE203EF08B00FF7741 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21FB89F7203EF3AA00FF7741 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,9 +80,9 @@
 				21FB89D7203EF08B00FF7741 /* AppDelegate.swift */,
 				21FB89D9203EF08B00FF7741 /* ViewController.swift */,
 				21FB89DB203EF08B00FF7741 /* Main.storyboard */,
-				21FB89DE203EF08B00FF7741 /* Assets.xcassets */,
 				21FB89E0203EF08B00FF7741 /* LaunchScreen.storyboard */,
 				21FB89E3203EF08B00FF7741 /* Info.plist */,
+				21FB89F7203EF3AA00FF7741 /* Assets.xcassets */,
 			);
 			path = githubAPI;
 			sourceTree = "<group>";
@@ -180,7 +180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21FB89E2203EF08B00FF7741 /* LaunchScreen.storyboard in Resources */,
-				21FB89DF203EF08B00FF7741 /* Assets.xcassets in Resources */,
+				21FB89F8203EF3AA00FF7741 /* Assets.xcassets in Resources */,
 				21FB89DD203EF08B00FF7741 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
