@@ -30,7 +30,9 @@ class ViewModel: ViewModelProtocol {
     }
     
     func getRepositories() -> [Repository] {
-        return repositories
+        return repositories.sorted(by: {
+            $0.name.lowercased() < $1.name.lowercased()
+        })
     }
     
 }

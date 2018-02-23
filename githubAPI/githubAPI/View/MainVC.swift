@@ -10,19 +10,30 @@ import UIKit
 
 class MainVC: UIViewController, UITableViewDataSource {
     var viewModel: ViewModelProtocol!
+    var accountName = "CocoaPods"
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel = ViewModel(accountName: "CocoaPods") {[weak self] repositories in
+        viewModel = ViewModel(accountName: self.accountName) {repositories in
             DispatchQueue.main.sync {
-                self?.navigationItem.title = "\(repositories.count) Repositories (CocoaPods)"
-                self?.tableView.reloadData()
+                self.navigationItem.title = "\(repositories.count) Repositories (\(self.accountName))"
+                self.tableView.reloadData()
+                
+                self.spinner.stopAnimating()
             }
         }
     }
+    
+    @IBAction func refreshRepositories(_ sender: UIBarButtonItem) {
+        self.spinner.startAnimating()
+        
+        viewModel.fetchRepositories(from: accountName)
+    }
+    
     
     // MARK: - TableView Data Source
 
@@ -70,6 +81,5 @@ class MainVC: UIViewController, UITableViewDataSource {
             }
         }
     }
- 
 
 }
