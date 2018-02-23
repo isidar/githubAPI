@@ -10,7 +10,7 @@ import Foundation
 
 struct Repository {
     var name: String
-    var description: String
+    var descriptionInfo: String
     var URL: String
     var forks: String
     var stars: String

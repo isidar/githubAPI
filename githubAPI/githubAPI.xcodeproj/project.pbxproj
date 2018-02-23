@@ -142,9 +142,9 @@
 		21FB89FE203F02F000FF7741 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				21FB8A04203F065F00FF7741 /* GithubAPIManager */,
 				21DD66A8203F5F8200C2C612 /* ViewModelProtocol.swift */,
 				21DD66AA203F5F9E00C2C612 /* ViewModel.swift */,
+				21FB8A04203F065F00FF7741 /* GithubAPIManager */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";

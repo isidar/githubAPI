@@ -54,7 +54,7 @@ class GithubAPIManager {
                             self.fetchTagsOf(repository: name) {tags in
                                 let newRepository = Repository(
                                     name: name,
-                                    description: description ?? "",
+                                    descriptionInfo: description ?? "",
                                     URL: urlHtml,
                                     forks: String(forksCount),
                                     stars: String(starCount),

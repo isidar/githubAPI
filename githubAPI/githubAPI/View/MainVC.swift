@@ -41,7 +41,7 @@ class MainVC: UIViewController, UITableViewDataSource {
         
         if let repositoryCell = cell as? RepositoryTableViewCell {
             repositoryCell.repositoryName.text = repository.name
-            repositoryCell.repositoryDescription.text = repository.description
+            repositoryCell.repositoryDescription.text = repository.descriptionInfo
             repositoryCell.forkCount.text = repository.forks
             repositoryCell.starsCount.text = repository.stars
         }
@@ -55,9 +55,16 @@ class MainVC: UIViewController, UITableViewDataSource {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             switch identifier {
-            case "Repository":
+            case "Repository Cell":
                 if let vc = segue.destination as? DetailTableVC {
-                    vc.viewModel = viewModel
+                    if let cell = sender as? RepositoryTableViewCell {
+                        let repositories = viewModel.getRepositories()
+                        let indexInArray = repositories.index(where: { (repository) -> Bool in
+                            repository.name == cell.repositoryName.text!
+                        })
+                        
+                        vc.repository = repositories[indexInArray!]
+                    }
                 }
             default: break
             }

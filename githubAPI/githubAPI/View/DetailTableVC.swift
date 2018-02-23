@@ -9,38 +9,38 @@
 import UIKit
 
 class DetailTableVC: UITableViewController {
-    var viewModel: ViewModelProtocol!
-
+    var repository: Repository!
+    
+    @IBOutlet weak var repositoryName: UILabel!
+    @IBOutlet weak var repositoryDescription: UILabel!
+    @IBOutlet weak var repositoryURL: UILabel!
+    @IBOutlet weak var repositoryForks: UILabel!
+    @IBOutlet weak var repositoryStars: UILabel!
+    @IBOutlet weak var repositoryAuthor: UILabel!
+    @IBOutlet weak var repositoryTags: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        updateAllFields()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func updateAllFields() {
+        repositoryName.text = repository.name
+        repositoryDescription.text = repository.descriptionInfo
+        repositoryURL.text = repository.URL
+        repositoryForks.text = repository.forks
+        repositoryStars.text = repository.stars
+        repositoryAuthor.text = repository.author
+        repositoryTags.text = repository.tags.isEmpty ?
+            "no tags" :
+            repository.tags.printElements()
     }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+    
+    @IBAction func urlClick(_ sender: UITapGestureRecognizer) {
+        if let url = URL(string: repositoryURL.text!) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
 
 }
