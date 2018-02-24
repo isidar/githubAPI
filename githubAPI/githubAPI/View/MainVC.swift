@@ -10,7 +10,7 @@ import UIKit
 
 class MainVC: UIViewController, UITableViewDataSource {
     var viewModel: ViewModelProtocol!
-    var accountName = "CocoaPods"
+    var accountName = "isidar"
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
@@ -18,7 +18,7 @@ class MainVC: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel = ViewModel(accountName: self.accountName) {repositories in
+        viewModel = ViewModel(accountName: self.accountName) { repositories in
             DispatchQueue.main.sync {
                 self.navigationItem.title = "\(repositories.count) Repositories (\(self.accountName))"
                 self.tableView.reloadData()

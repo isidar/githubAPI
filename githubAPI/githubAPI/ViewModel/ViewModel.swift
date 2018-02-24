@@ -9,22 +9,29 @@
 import Foundation
 
 class ViewModel: ViewModelProtocol {
+    // Model
     private var repositories = [Repository]() {
         didSet {
-            updated(self.repositories)
+            updateUI?(self.repositories)
         }
     }
     
-    private var updated: ([Repository]) -> ()
+    private var updateUI: Updater?
     
-    required init(accountName: String, updatedRepositories: @escaping ([Repository]) -> ()) {
-        updated = updatedRepositories
+    required init(accountName: String, updateUI: Updater?) {
+        fetchRepositories(from: accountName, updateUI: updateUI)
+    }
+    
+    func fetchRepositories(from accountName: String, updateUI: Updater?) {
+        self.updateUI = updateUI
         
-        fetchRepositories(from: accountName)
+        _ = GithubAPIManager(accountName: accountName) { repositories, errorMessage in
+            self.repositories = repositories
+        }
     }
     
     func fetchRepositories(from accountName: String) {
-        _ = GithubAPIManager(accountName: accountName) {repositories, errorMessage in
+        _ = GithubAPIManager(accountName: accountName) { repositories, errorMessage in
             self.repositories = repositories
         }
     }
