@@ -10,7 +10,7 @@ import UIKit
 
 class MainVC: UIViewController, UITableViewDataSource {
     var viewModel: ViewModelProtocol!
-    var accountName = "isidar"
+    var accountName = "CocoaPods"
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
