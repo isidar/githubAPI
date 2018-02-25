@@ -1,2 +1,2 @@
 # githubAPI
-Fetch data from particular github account
+Fetches repositories data from particular github account
