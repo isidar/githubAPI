@@ -9,6 +9,7 @@
 import Foundation
 
 extension Array {
+    /// Returns string of sequence of elements in appropriate order with comma separator
     func printElements() -> String {
         var str = ""
         

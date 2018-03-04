@@ -9,7 +9,15 @@
 import UIKit
 
 class RepositoryTableViewCell: UITableViewCell {
+    // MARK: - Outlet
+    
+    @IBOutlet weak var repositoryName: UILabel!
+    @IBOutlet weak var repositoryDescription: UILabel!
+    @IBOutlet weak var forkCount: UILabel!
+    @IBOutlet weak var starsCount: UILabel!
 
+    // MARK: - TableView Cell's lifecycle
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,11 +28,6 @@ class RepositoryTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
-    @IBOutlet weak var repositoryName: UILabel!
-    @IBOutlet weak var repositoryDescription: UILabel!
-    @IBOutlet weak var forkCount: UILabel!
-    @IBOutlet weak var starsCount: UILabel!
-    
+
 
 }

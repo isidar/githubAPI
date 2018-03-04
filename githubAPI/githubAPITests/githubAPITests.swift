@@ -26,6 +26,7 @@ class githubAPITests: XCTestCase {
         
         _ = ViewModel(accountName: "isidar") { repositories in
             XCTAssert(repositories.count >= 3)
+            print(repositories.count)
             for repository in repositories {
                 XCTAssert(
                     repository.name == "calculatorRepository" ||
@@ -38,7 +39,7 @@ class githubAPITests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 10) { error in
+        waitForExpectations(timeout: 20) { error in
             XCTAssertNil(error, "Test timed out. \(error?.localizedDescription ?? "")")
         }
     }
@@ -50,7 +51,7 @@ class githubAPITests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 10) { error in
+        waitForExpectations(timeout: 20) { error in
             XCTAssertNil(error, "Test timed out. \(error?.localizedDescription ?? "")")
         }
         
@@ -79,7 +80,7 @@ class githubAPITests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 10) { error in
+        waitForExpectations(timeout: 20) { error in
             XCTAssertNil(error, "Test timed out. \(error?.localizedDescription ?? "")")
         }
     }
@@ -96,7 +97,7 @@ class githubAPITests: XCTestCase {
             
             cocoaPodsExpect.fulfill()
         }
-        wait(for: [cocoaPodsExpect], timeout: 10)
+        wait(for: [cocoaPodsExpect], timeout: 20)
         
         // fetching data from 'isidar'
         viewModel.fetchRepositories(from: "isidar") { repositories in
@@ -106,7 +107,7 @@ class githubAPITests: XCTestCase {
             
             isidarExpect.fulfill()
         }
-        wait(for: [isidarExpect], timeout: 10)
+        wait(for: [isidarExpect], timeout: 20)
     }
     
 }
