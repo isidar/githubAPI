@@ -8,53 +8,53 @@
 
 import Foundation
 
-class ViewModel: ViewModelProtocol {
-    // MARK: - Model
+protocol ViewModelProtocol {
+    /// Fetches repositories from certain account and executes given function
+    func fetchRepositories(fromAccount account: String, updateUI: Updater?)
+    /// Fetches repositories from certain account and executes early given function
+    func fetchRepositories(fromAccount account: String)
     
-    private var repositories = [Repository]() {
+    var repositories: [Repository] { get }
+    
+    init(accountName: String, updateUI: Updater?)
+}
+
+typealias Updater = ([Repository]) -> Void
+
+class ViewModel: ViewModelProtocol {
+    
+    private(set) var repositories: [Repository] = [] {
         didSet {
-            updateUI?(self.repositories)
+            updateUI?(repositories)
         }
     }
-    
-    // MARK: - Data source
     
     private var updateUI: Updater?
     
     // MARK: - Inits
     
     required init(accountName: String, updateUI: Updater?) {
-        fetchRepositories(from: accountName, updateUI: updateUI)
+        fetchRepositories(fromAccount: accountName, updateUI: updateUI)
     }
-    
-    // MARK: - Deinit
-    
-    deinit { print("\n  ViewModel deallocated") }
     
     // MARK: - Other functions
     
     /// Fetches repositories from certain account and executes given function
-    func fetchRepositories(from accountName: String, updateUI: Updater?) {
+    func fetchRepositories(fromAccount account: String, updateUI: Updater?) {
         self.updateUI = updateUI
-        
-        _ = GithubAPIManager(accountName: accountName) { repositories, errorMessage in
-            self.repositories = repositories
-        }
+        fetchRepositories(fromAccount: account)
     }
     
     /// Fetches repositories from certain account and executes early given function
-    func fetchRepositories(from accountName: String) {
-        _ = GithubAPIManager(accountName: accountName) { repositories, errorMessage in
-            self.repositories = repositories
+    func fetchRepositories(fromAccount account: String) {
+        GithubAPIManager.fetchRepositories(fromAccount: account) { result in
+            switch result {
+            case .success(let repositories):
+                self.repositories = repositories
+            case .failure(let error):
+                print(error)
+            }
         }
     }
-    
-    /// Returns array of repositories in alphabetical order
-    func getRepositories() -> [Repository] {
-        return repositories.sorted(by: {
-            $0.name.lowercased() < $1.name.lowercased()
-        })
-    }
-    
     
 }

@@ -9,54 +9,51 @@
 import UIKit
 
 class DetailTableViewController: UITableViewController {
-    // MARK: - Model
     
     var repository: Repository?
     
     // MARK: - Outlets
     
-    @IBOutlet weak var repositoryName: UILabel!
-    @IBOutlet weak var repositoryDescription: UILabel!
-    @IBOutlet weak var repositoryURL: UILabel!
-    @IBOutlet weak var repositoryForks: UILabel!
-    @IBOutlet weak var repositoryStars: UILabel!
-    @IBOutlet weak var repositoryAuthor: UILabel!
-    @IBOutlet weak var repositoryTags: UILabel!
+    @IBOutlet private weak var repositoryName: UILabel!
+    @IBOutlet private weak var repositoryDescription: UILabel!
+    @IBOutlet private weak var repositoryURL: UILabel!
+    @IBOutlet private weak var repositoryForks: UILabel!
+    @IBOutlet private weak var repositoryStars: UILabel!
+    @IBOutlet private weak var repositoryAuthor: UILabel!
+    @IBOutlet private weak var repositoryTags: UILabel!
     
     // MARK: - View Controller's lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         updateAllFields()
     }
     
-    // MARK: - Deinit
-    
-    deinit { print("\n  DetailTableViewController deallocated") }
-    
     // MARK: - Actions
     
-    @IBAction func urlClick(_ sender: UITapGestureRecognizer) {
-        if let url = URL(string: repositoryURL.text!) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        }
+    @IBAction private func urlClick(_ sender: UITapGestureRecognizer) {
+        guard let urlString = repositoryURL.text,
+              let url = URL(string: urlString) else { return }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
     // MARK: - Other functions
     
-    /// Fills all outlets with appropriate repository data
-    func updateAllFields() {
-        if let repository = repository {
-            repositoryName.text = repository.name
-            repositoryDescription.text = repository.descriptionInfo
-            repositoryURL.text = repository.URL
-            repositoryForks.text = repository.forks
-            repositoryStars.text = repository.stars
-            repositoryAuthor.text = repository.author
-            repositoryTags.text = repository.tags.isEmpty ?
-                "no tags" :
-                repository.tags.printElements()
+    private func updateAllFields() {
+        guard let repository = repository else { return }
+        
+        repositoryName.text = repository.name
+        repositoryDescription.text = repository.descriptionInfo
+        repositoryURL.text = repository.URL
+        repositoryForks.text = repository.forks.string(ifNil: "-")
+        repositoryStars.text = repository.stars.string(ifNil: "-")
+        repositoryAuthor.text = repository.author
+        if let tags = repository.tags {
+            repositoryTags.text = tags.isEmpty ?
+                                  "no tags" :
+                                  tags.join()
+        } else {
+            repositoryTags.text = "-"
         }
     }
     

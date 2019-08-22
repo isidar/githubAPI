@@ -9,11 +9,11 @@
 import Foundation
 
 struct Repository {
-    var name: String
-    var descriptionInfo: String
-    var URL: String
-    var forks: String
-    var stars: String
-    var author: String
-    var tags: [String]
+    var name: String?
+    var descriptionInfo: String?
+    var URL: String?
+    var forks: Int?
+    var stars: Int?
+    var author: String?
+    var tags: [String]?
 }

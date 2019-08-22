@@ -8,19 +8,21 @@
 
 import Foundation
 
-extension Array {
+extension Array where Element: LosslessStringConvertible {    
     /// Returns string of sequence of elements in appropriate order with comma separator
-    func printElements() -> String {
-        var str = ""
-        
-        for element in self {
-            str += "\(element), "
+    func join(withSeparator separator: String = ", ") -> String {
+        return reduce(into: "") { $0 += $0.isEmpty ? "\($1)" : separator + "\($1)" }
+    }
+}
+
+extension Array {
+    subscript(safe index: Int) -> Element? {
+        get {
+            return indices ~= index ? self[index] : nil
         }
-        if !str.isEmpty {
-            str.removeLast()
-            str.removeLast()
+        set {
+            guard let value = newValue, index < count, index >= 0 else { return }
+            self[index] = value
         }
-        
-        return str
     }
 }

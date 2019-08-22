@@ -8,7 +8,8 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UITableViewDataSource {
+class MainViewController: UIViewController {
+    
     // MARK: - ViewModel
     
     var viewModel: ViewModelProtocol!
@@ -16,58 +17,75 @@ class MainViewController: UIViewController, UITableViewDataSource {
     // MARK: - Source data
     
     var accountName = "CocoaPods"
+    private var repositories: [Repository] = []
     
     // MARK: - Outlets
 
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var spinner: UIActivityIndicatorView!
     
     // MARK: - View Controller's lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel = ViewModel(accountName: self.accountName) { [weak self] repositories in
+        viewModel = ViewModel(accountName: accountName) { [weak self] repositories in
+            guard let welf = self else { return }
+            
             DispatchQueue.main.async {
-                self?.navigationItem.title = "\(repositories.count) Repositories (\(self?.accountName ?? ""))"
-                self?.tableView.reloadData()
-                self?.spinner.stopAnimating()
+                welf.navigationItem.title = "\(repositories.count) Repositories in \(welf.accountName) account"
+                welf.repositories = repositories.sorted { ($0.name ?? "").lowercased() < ($1.name ?? "").lowercased() }
+                welf.tableView.reloadData()
+                welf.spinner.stopAnimating()
             }
         }
     }
     
-    // MARK: - Deinit
-    
-    deinit { print("\n  MainViewController deallocated") }
-    
     // MARK: - Actions
     
-    @IBAction func refreshRepositories(_ sender: UIBarButtonItem) {
-        self.spinner.startAnimating()
-        
-        viewModel.fetchRepositories(from: accountName)
+    @IBAction private func refreshRepositories(_ sender: UIBarButtonItem) {
+        spinner.startAnimating()
+        viewModel.fetchRepositories(fromAccount: accountName)
     }
     
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let identifier = segue.identifier {
-            switch identifier {
-            case "Repository Cell":
-                if let vc = segue.destination as? DetailTableViewController {
-                    if let cell = sender as? RepositoryTableViewCell {
-                        let repositories = viewModel.getRepositories()
-                        
-                        if let indexInArray = repositories.index(where: { (repository) -> Bool in
-                            repository.name == cell.repositoryName.text ?? ""
-                        }) {
-                            vc.repository = repositories[indexInArray]
-                        }
-                    }
-                }
-            default: break
-            }
+        guard let identifier = segue.identifier else { return }
+        
+        switch identifier {
+        case "Repository Cell":
+            guard let vc = segue.destination as? DetailTableViewController,
+                  let cell = sender as? RepositoryTableViewCell else { break }
+            
+            vc.repository = repositories.first { $0.name == (cell.repositoryName.text ?? "") }
+        default: break
         }
     }
 
+}
+
+// MARK: - TableView Data Source
+extension MainViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.repositories.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        tableView.rowHeight = 101
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Repository", for: indexPath)
+        
+        guard let repository = repositories[safe: indexPath.row],
+              let repositoryCell = cell as? RepositoryTableViewCell else { return cell }
+        
+        repositoryCell.repositoryName.text = repository.name
+        repositoryCell.repositoryDescription.text = repository.descriptionInfo
+        repositoryCell.forkCount.text = repository.forks.string(ifNil: "-")
+        repositoryCell.starsCount.text = repository.stars.string(ifNil: "-")
+        
+        return repositoryCell
+    }
+    
 }

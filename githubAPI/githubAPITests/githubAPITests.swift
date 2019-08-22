@@ -27,14 +27,16 @@ class githubAPITests: XCTestCase {
         _ = ViewModel(accountName: "isidar") { repositories in
             XCTAssert(repositories.count >= 3)
             print(repositories.count)
-            for repository in repositories {
-                XCTAssert(
-                    repository.name == "calculatorRepository" ||
-                        repository.name == "discountCardManager" ||
-                        repository.name == "githubAPI",
-                    "Array of repositories hasn't all required items"
-                )
+            
+            let neededRepositoriesExist = repositories.contains {
+                switch ($0.name ?? "") {
+                case "calculatorRepository", "discountCardManager", "githubAPI":
+                    return true
+                default:
+                    return false
+                }
             }
+            XCTAssert(neededRepositoriesExist, "Array of repositories hasn't all required items")
             
             expect.fulfill()
         }
@@ -55,7 +57,7 @@ class githubAPITests: XCTestCase {
             XCTAssertNil(error, "Test timed out. \(error?.localizedDescription ?? "")")
         }
         
-        let sortedRepositories = viewModel.getRepositories()
+        let sortedRepositories = viewModel.repositories
         
         XCTAssert(
             sortedRepositories[0].name == "calculatorRepository" &&
@@ -69,12 +71,12 @@ class githubAPITests: XCTestCase {
         let expect = expectation(description: "Fetching repositories should succeeed")
         
         _ = ViewModel(accountName: "CocoaPods") { repositories in
-            if let cocoaPodsIndex = repositories.index(where: { $0.name == "CocoaPods" }) {
+            if let cocoaPodsIndex = repositories.firstIndex(where: { $0.name == "CocoaPods" }) {
                 let cocoaPodsRepository = repositories[cocoaPodsIndex]
                 
                 XCTAssert(cocoaPodsRepository.URL == "https://github.com/CocoaPods/CocoaPods")
-                XCTAssertFalse(cocoaPodsRepository.tags.isEmpty)
-                XCTAssertNotNil(cocoaPodsRepository.tags.index(of: "swift"))
+                XCTAssertFalse(cocoaPodsRepository.tags?.isEmpty == true)
+                XCTAssertNotNil(cocoaPodsRepository.tags?.firstIndex(of: "swift"))
             } else { XCTAssertNotNil(nil, "There is no 'CocoaPods' repository") }
             
             expect.fulfill()
@@ -91,19 +93,19 @@ class githubAPITests: XCTestCase {
         
         // fetching data from 'CocoaPods'
         let viewModel = ViewModel(accountName: "CocoaPods") { repositories in
-            let cocoaPodsIndex = repositories.index(where: { $0.name == "CocoaPods" })
+            let cocoaPodsIndex = repositories.firstIndex(where: { $0.name == "CocoaPods" })
     
-            XCTAssertNotNil(cocoaPodsIndex, "There is no 'CocoaPods' repository. Fetching failed")
+            XCTAssertNotNil(cocoaPodsIndex, "There is no 'CocoaPods' repository. Fetching has failed")
             
             cocoaPodsExpect.fulfill()
         }
         wait(for: [cocoaPodsExpect], timeout: 20)
         
         // fetching data from 'isidar'
-        viewModel.fetchRepositories(from: "isidar") { repositories in
-            let githubAPIIndex = repositories.index(where: { $0.name == "githubAPI" })
+        viewModel.fetchRepositories(fromAccount: "isidar") { repositories in
+            let githubAPIIndex = repositories.firstIndex(where: { $0.name == "githubAPI" })
             
-            XCTAssertNotNil(githubAPIIndex, "There is no 'githubAPI' repository. Fetching failed")
+            XCTAssertNotNil(githubAPIIndex, "There is no 'githubAPI' repository. Fetching has failed")
             
             isidarExpect.fulfill()
         }

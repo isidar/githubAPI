@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		21DD66A9203F5F8200C2C612 /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DD66A8203F5F8200C2C612 /* ViewModelProtocol.swift */; };
+		21427FF4230D416E000671F9 /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21427FF3230D416E000671F9 /* Optional.swift */; };
 		21DD66AB203F5F9E00C2C612 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DD66AA203F5F9E00C2C612 /* ViewModel.swift */; };
 		21DD66AD203F670700C2C612 /* GithubAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DD66AC203F670700C2C612 /* GithubAPIManager.swift */; };
 		21DD66B1203F68AB00C2C612 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DD66B0203F68AB00C2C612 /* Array.swift */; };
-		21DF3FB4204C2B4600D47E7A /* ExtensionMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DF3FB3204C2B4600D47E7A /* ExtensionMainViewController.swift */; };
 		21FB89D8203EF08B00FF7741 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FB89D7203EF08B00FF7741 /* AppDelegate.swift */; };
 		21FB89DD203EF08B00FF7741 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21FB89DB203EF08B00FF7741 /* Main.storyboard */; };
 		21FB89E2203EF08B00FF7741 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21FB89E0203EF08B00FF7741 /* LaunchScreen.storyboard */; };
@@ -34,11 +33,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		21DD66A8203F5F8200C2C612 /* ViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
+		21427FF3230D416E000671F9 /* Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optional.swift; sourceTree = "<group>"; };
 		21DD66AA203F5F9E00C2C612 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		21DD66AC203F670700C2C612 /* GithubAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubAPIManager.swift; sourceTree = "<group>"; };
 		21DD66B0203F68AB00C2C612 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
-		21DF3FB3204C2B4600D47E7A /* ExtensionMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionMainViewController.swift; sourceTree = "<group>"; };
 		21FB89D4203EF08B00FF7741 /* githubAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = githubAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21FB89D7203EF08B00FF7741 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21FB89DC203EF08B00FF7741 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -87,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				21DD66B0203F68AB00C2C612 /* Array.swift */,
+				21427FF3230D416E000671F9 /* Optional.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -95,7 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				21FB89F9203F02B300FF7741 /* MainViewController.swift */,
-				21DF3FB3204C2B4600D47E7A /* ExtensionMainViewController.swift */,
+				21FB8A02203F04BE00FF7741 /* RepositoryTableViewCell.swift */,
 			);
 			path = MainViewController;
 			sourceTree = "<group>";
@@ -129,10 +128,11 @@
 		21FB89D6203EF08B00FF7741 /* githubAPI */ = {
 			isa = PBXGroup;
 			children = (
+				21DD66B2203F68B000C2C612 /* Extensions */,
+				21FB8A04203F065F00FF7741 /* GithubAPIManager */,
 				21FB89FB203F02BA00FF7741 /* View */,
 				21FB89FE203F02F000FF7741 /* ViewModel */,
 				21FB89FF203F02FB00FF7741 /* Model */,
-				21DD66B2203F68B000C2C612 /* Extensions */,
 				21DD66A7203F1D0100C2C612 /* SupportingFiles */,
 			);
 			path = githubAPI;
@@ -153,7 +153,6 @@
 				21FB89DB203EF08B00FF7741 /* Main.storyboard */,
 				21DF3FB1204C2A0600D47E7A /* MainViewController */,
 				21DF3FB2204C2A1400D47E7A /* DetailTableViewController */,
-				21FB8A02203F04BE00FF7741 /* RepositoryTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -161,9 +160,7 @@
 		21FB89FE203F02F000FF7741 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				21DD66A8203F5F8200C2C612 /* ViewModelProtocol.swift */,
 				21DD66AA203F5F9E00C2C612 /* ViewModel.swift */,
-				21FB8A04203F065F00FF7741 /* GithubAPIManager */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -288,15 +285,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				21DD66B1203F68AB00C2C612 /* Array.swift in Sources */,
+				21427FF4230D416E000671F9 /* Optional.swift in Sources */,
 				21FB89D8203EF08B00FF7741 /* AppDelegate.swift in Sources */,
 				21DD66AD203F670700C2C612 /* GithubAPIManager.swift in Sources */,
 				21FB89FA203F02B300FF7741 /* MainViewController.swift in Sources */,
 				21FB89FD203F02DF00FF7741 /* DetailTableViewController.swift in Sources */,
-				21DD66A9203F5F8200C2C612 /* ViewModelProtocol.swift in Sources */,
 				21FB8A03203F04BE00FF7741 /* RepositoryTableViewCell.swift in Sources */,
 				21DD66AB203F5F9E00C2C612 /* ViewModel.swift in Sources */,
 				21FB8A01203F033B00FF7741 /* Repository.swift in Sources */,
-				21DF3FB4204C2B4600D47E7A /* ExtensionMainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +388,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -441,6 +438,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -455,7 +453,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = isidar.githubAPI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -470,7 +468,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = isidar.githubAPI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -486,7 +484,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = isidar.githubAPITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/githubAPI.app/githubAPI";
 			};
@@ -503,7 +501,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = isidar.githubAPITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/githubAPI.app/githubAPI";
 			};
