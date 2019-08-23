@@ -9,52 +9,22 @@
 import Foundation
 
 protocol ViewModelProtocol {
-    /// Fetches repositories from certain account and executes given function
-    func fetchRepositories(fromAccount account: String, updateUI: Updater?)
     /// Fetches repositories from certain account and executes early given function
-    func fetchRepositories(fromAccount account: String)
-    
-    var repositories: [Repository] { get }
-    
-    init(accountName: String, updateUI: Updater?)
+    func fetchRepositories(fromAccount account: String, completion: RepositoriesFetchingCompletion?)
 }
 
-typealias Updater = ([Repository]) -> Void
+enum FetchingError: Error {
+    case plain(Error)
+    case other(String)
+}
+
+typealias RepositoriesFetchingCompletion = (Result<[Repository], FetchingError>) -> Void
 
 class ViewModel: ViewModelProtocol {
     
-    private(set) var repositories: [Repository] = [] {
-        didSet {
-            updateUI?(repositories)
-        }
-    }
-    
-    private var updateUI: Updater?
-    
-    // MARK: - Inits
-    
-    required init(accountName: String, updateUI: Updater?) {
-        fetchRepositories(fromAccount: accountName, updateUI: updateUI)
-    }
-    
-    // MARK: - Other functions
-    
-    /// Fetches repositories from certain account and executes given function
-    func fetchRepositories(fromAccount account: String, updateUI: Updater?) {
-        self.updateUI = updateUI
-        fetchRepositories(fromAccount: account)
-    }
-    
-    /// Fetches repositories from certain account and executes early given function
-    func fetchRepositories(fromAccount account: String) {
-        GithubAPIManager.fetchRepositories(fromAccount: account) { result in
-            switch result {
-            case .success(let repositories):
-                self.repositories = repositories
-            case .failure(let error):
-                print(error)
-            }
-        }
+    /// Fetches repositories from certain account
+    func fetchRepositories(fromAccount account: String, completion: RepositoriesFetchingCompletion?) {
+        GithubAPIManager.fetchRepositories(fromAccount: account, completion: completion)
     }
     
 }

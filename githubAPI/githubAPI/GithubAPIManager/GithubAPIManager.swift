@@ -10,13 +10,6 @@ import Foundation
 
 class GithubAPIManager {
     
-    enum FetchingError: Error {
-        case plain(Error)
-        case other(String)
-    }
-    
-    typealias RepositoriesFetchingCompletion = (Result<[Repository], FetchingError>) -> Void
-    
     static func fetchRepositories(fromAccount account: String, completion: RepositoriesFetchingCompletion?) {
         let request = "https://api.github.com/users/\(account)/repos"        
         guard let url = URL(string: request) else { return }
