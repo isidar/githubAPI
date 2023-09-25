@@ -14,13 +14,13 @@ class DetailTableViewController: UITableViewController {
     
     // MARK: - Outlets
     
-    @IBOutlet private weak var repositoryName: UILabel!
-    @IBOutlet private weak var repositoryDescription: UILabel!
-    @IBOutlet private weak var repositoryURL: UILabel!
-    @IBOutlet private weak var repositoryForks: UILabel!
-    @IBOutlet private weak var repositoryStars: UILabel!
-    @IBOutlet private weak var repositoryAuthor: UILabel!
-    @IBOutlet private weak var repositoryTags: UILabel!
+    @IBOutlet private var repositoryName: UILabel!
+    @IBOutlet private var repositoryDescription: UILabel!
+    @IBOutlet private var repositoryURL: UILabel!
+    @IBOutlet private var repositoryForks: UILabel!
+    @IBOutlet private var repositoryStars: UILabel!
+    @IBOutlet private var repositoryAuthor: UILabel!
+    @IBOutlet private var repositoryTags: UILabel!
     
     // MARK: - View Controller's lifecycle
     
