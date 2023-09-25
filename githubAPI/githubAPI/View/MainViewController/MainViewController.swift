@@ -21,8 +21,8 @@ class MainViewController: UIViewController {
     
     // MARK: - Outlets
 
-    @IBOutlet private weak var tableView: UITableView!
-    @IBOutlet private weak var spinner: UIActivityIndicatorView!
+    @IBOutlet private var tableView: UITableView!
+    @IBOutlet private var spinner: UIActivityIndicatorView!
     
     private var repositoriesFetchingCompletion: RepositoriesFetchingCompletion?
     // MARK: - View Controller's lifecycle
